@@ -1,0 +1,22 @@
+package com.parking.entity;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import java.util.List;
+
+@Data
+@Entity
+@Table(name = "floors")
+public class Floor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long floorId;
+
+    @Column(nullable = false, unique = true)
+    private Integer floorNumber;
+
+    private String floorName;
+
+    @OneToMany(mappedBy = "floor", fetch = FetchType.LAZY)
+    private List<ParkingSpot> parkingSpots;
+}
